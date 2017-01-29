@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:flattr_sdk="http://schemas.flattr4android.com/sdk"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+
+
+	  <ScrollView
+		android:layout_gravity="center_vertical"
+		 android:layout_width="fill_parent"
+		android:layout_height="fill_parent"
+		android:layout_above="@+id/ad">
+
+	<LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:gravity="center_horizontal"
+	    android:orientation="vertical"
+	    android:padding="10dip"
+	    android:paddingTop="10dp" >
+
+		<ImageView 
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:scaleType="fitCenter" android:src="@drawable/icon">
+		</ImageView>
+		<TextView android:id="@+id/TextViewVersion"
+			android:textSize="7pt"
+			android:gravity="center_vertical|center_horizontal"
+			android:layout_width="fill_parent" android:layout_height="wrap_content"
+			android:paddingBottom="10dp"
+		/>
+
+		        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginBottom="10dip"
+                android:layout_marginTop="10dip"
+                android:autoLink="web"
+                android:padding="10dip"
+                android:text="@string/madeby"
+                />
+
+
+		        <Button
+		            android:id="@+id/love_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dip"
+                android:text="@string/pleaserate"
+                android:drawableTop="@drawable/love"
+                android:background="@android:color/transparent"
+                />
+
+
+				<ImageButton android:id="@+id/paypal_button"
+					android:clickable="true" android:src="@drawable/paypal_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content" android:layout_gravity="center"
+					android:padding="0dip"
+					android:layout_marginBottom="20dip"	 />
+
+
+      </LinearLayout>
+
+ </ScrollView>
+
+       <com.google.ads.AdView
+           xmlns:ads="http://schemas.android.com/apk/lib/com.google.ads"
+           android:id="@+id/ad"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_alignParentBottom="true"
+           ads:adSize="BANNER"
+           ads:adUnitId="a14f58d316c19d5"
+           android:gravity="center_horizontal"
+           ads:loadAdOnCreate="true" />
+
+</RelativeLayout>
+

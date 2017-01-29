@@ -1,0 +1,8 @@
+Flask
+google-cloud
+apache-libcloud
+pycrypto
+gunicorn
+oauth2client
+flask-httpauth
+itsdangerous

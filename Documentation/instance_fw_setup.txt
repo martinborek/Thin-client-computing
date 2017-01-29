@@ -1,0 +1,3 @@
+How to allow VNC traffic to Google Compute Engine instances using Google Cloud SDK CLI:
+
+gcloud compute firewall-rules create ALLOW_VNC --allow tcp:5901

@@ -1,0 +1,75 @@
+How to setup a Debian 8 instance to run a tightvnc server for the project:
+
+1. Install desktop environment and VNC server
+apt-get update
+apt-get install xfce4 xfce4-goodies gnome-icon-theme tightvncserver
+
+2. Create VNC user, grant sudo permissions and switch to that user
+adduser vnc
+gpasswd -a vnc sudo
+su - vnc
+
+3. Create a script to manage the VNC server
+sudo nano /usr/local/bin/ttvncserver
+
+#!/bin/bash
+PATH="$PATH:/usr/bin/"
+DISPLAY="1"
+DEPTH="16"
+GEOMETRY="1024x768"
+OPTIONS="-depth ${DEPTH} -geometry ${GEOMETRY} :${DISPLAY}"
+
+case "$1" in
+start)
+/usr/bin/vncserver ${OPTIONS}
+;;
+
+stop)
+/usr/bin/vncserver -kill :${DISPLAY}
+;;
+
+restart)
+$0 stop
+$0 start
+;;
+esac
+exit 0
+
+4. Make the script executable
+sudo chmod +x /usr/local/bin/myvncserver
+
+5. Create unit file for the VNC server service
+sudo nano /lib/systemd/system/ttvncserver.service
+
+[Unit]
+Description=Manage VNC Server on this droplet
+
+[Service]
+Type=forking
+ExecStart=/usr/local/bin/myvncserver start
+ExecStop=/usr/local/bin/myvncserver stop
+ExecReload=/usr/local/bin/myvncserver restart
+User=vnc
+
+[Install]
+WantedBy=multi-user.target
+
+6. Enable service to be started on boot
+sudo systemctl daemon-reload
+sudo systemctl enable myvncserver.service
+
+7. Configure VNC server to start an app when a client connects
+sudo nano ~/.vnc/xstartup
+
+!/bin/sh
+xrdb $HOME/.Xresources
+xsetroot -solid grey
+#x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
+#x-window-manager &
+# Fix to make GNOME work
+export XKL_XMODMAP_DISABLE=1
+/etc/X11/Xsession &
+<<Insert app run command here, for example "inkscape">>
+
+8. Reboot server and test VNC connection
+
