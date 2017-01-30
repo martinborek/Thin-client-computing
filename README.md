@@ -1,4 +1,9 @@
-# Temerarious Thirteens - Project 1 for CSE-4100
+# Thin client computing
+
+Accessing applications running on Virtual Machines in the cloud from an Android application. Project for the course "Mobile cloud computing", taken at Aalto University in 2016.
+
+Authors: Martin Borek, Fabiano Paiva Brito, Juho Kokko, Ivan Shabunin
+
 
 ## How to start
 
